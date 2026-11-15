@@ -7,7 +7,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: { default: "Bizniss — Book trusted local services", template: "%s | Bizniss" },
   description:
-    "Find doctors, salons, plumbers and more near you. Get an instant AI quote and book with JazzCash, Easypaisa or PayFast.",
+    "Find doctors, salons, plumbers and more near you. Get an instant AI quote and pay only when the technician arrives.",
 };
 
 export const viewport: Viewport = { themeColor: "#f97316" };

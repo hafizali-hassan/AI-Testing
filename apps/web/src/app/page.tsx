@@ -1,15 +1,10 @@
-import {
-  CATEGORIES,
-  CATEGORY_LABELS,
-  PAYMENT_METHODS,
-  PAYMENT_METHOD_LABELS,
-} from "@bizniss/shared";
+import { CATEGORIES, CATEGORY_LABELS } from "@bizniss/shared";
 
 const steps = [
   { title: "Choose a business", text: "Browse verified doctors, salons, plumbers and more near you." },
   { title: "Get an AI quote", text: "Our AI assistant finds a free time slot and gives you the exact cost." },
-  { title: "Pay & confirm", text: "Pay securely with JazzCash, Easypaisa or PayFast to lock your booking." },
-  { title: "Get it done", text: "A professional is assigned and your invoice arrives by email." },
+  { title: "Confirm your booking", text: "Accept the quote and a verified technician is assigned to your job." },
+  { title: "Pay on arrival", text: "When the technician arrives, you get an invoice by email with a secure payment link." },
 ];
 
 export default function Home() {
@@ -113,8 +108,8 @@ export default function Home() {
           <div className="rounded-brand bg-brand-600 p-8 text-white sm:p-10">
             <h2 className="text-2xl font-bold">Grow your practice or business</h2>
             <p className="mt-2 max-w-xl text-brand-100">
-              List for free and get paid bookings from new customers. We only charge a 10%
-              commission on each appointment.
+              List for free and get paid bookings from new customers. We only charge a 15%
+              commission on each invoice.
             </p>
             <a
               href="/business/signup"
@@ -129,7 +124,7 @@ export default function Home() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted sm:flex-row sm:justify-between">
           <p>© Bizniss</p>
-          <p>Payments: {PAYMENT_METHODS.map((m) => PAYMENT_METHOD_LABELS[m]).join(" · ")}</p>
+          <p>Secure card payments by Stripe · Prices in USD</p>
         </div>
       </footer>
     </>

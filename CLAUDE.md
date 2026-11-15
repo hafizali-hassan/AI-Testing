@@ -27,8 +27,13 @@ A **local services marketplace** shipped as a **web app** plus **iOS and Android
 
 ### Business decisions
 - Brand name: **Bizniss**. Orange colour scheme (tokens in `packages/shared/src/tokens.ts`).
-- Payments (Pakistan, PKR): **JazzCash, Easypaisa, PayFast**. Money is stored as integer paisa.
-- Platform takes a **10% commission** from the provider (e.g. doctor) on each appointment (`splitCommission` in `packages/shared/src/money.ts`).
+- Launch country: **Pakistan**. Currency: **USD**. Money is stored as integer cents.
+- Payments: **Stripe**. Customers pay **when the technician reaches the job site**: on `arrived`, an invoice with a Stripe payment link is emailed to the customer.
+- Platform commission: **15% of the invoice price** (`splitCommission` in `packages/shared/src/money.ts`).
+- Technicians are **independent contractors** (not employees of the businesses).
+- Auth: **Supabase Auth**. Sign up with **name, email and phone** (Pakistani mobile); sign in with email.
+- Database: **Supabase (Postgres)** with Row Level Security on every table.
+- Email: **Resend** (invoices, booking updates).
 
 ### Stack and layout
 - npm workspaces + Turborepo monorepo. Run `npm run dev:web` from the root (http://localhost:3000).
