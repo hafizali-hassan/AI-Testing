@@ -25,7 +25,16 @@ A **local services marketplace** shipped as a **web app** plus **iOS and Android
 - Actions with side effects (charging money, dispatching technicians, sending invoices) go through backend tools with validation, authorization and an audit log.
 - Payments run only through the payment provider. The agent creates payment links but never handles card data.
 
-When the stack is chosen, prefer one that shares code across platforms, for example a TypeScript monorepo with a web framework (e.g. Next.js), a React Native/Expo mobile app, and shared packages for types, API client, UI tokens and agent logic. Update this file once a decision is made.
+### Business decisions
+- Brand name: **Bizniss**. Orange colour scheme (tokens in `packages/shared/src/tokens.ts`).
+- Payments (Pakistan, PKR): **JazzCash, Easypaisa, PayFast**. Money is stored as integer paisa.
+- Platform takes a **10% commission** from the provider (e.g. doctor) on each appointment (`splitCommission` in `packages/shared/src/money.ts`).
+
+### Stack and layout
+- npm workspaces + Turborepo monorepo. Run `npm run dev:web` from the root (http://localhost:3000).
+- `apps/web`: Next.js 16 (App Router, `cacheComponents` on) + Tailwind 4. Read `apps/web/AGENTS.md` and `node_modules/next/dist/docs/` before writing Next.js code; this version has breaking changes.
+- `apps/mobile`: Expo (React Native) app for iOS and Android (planned).
+- `packages/shared`: design tokens, zod schemas, types, money/commission helpers. Consumed as TypeScript source by web and mobile.
 
 ## Engineering rules
 
