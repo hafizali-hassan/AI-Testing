@@ -1,0 +1,44 @@
+# CLAUDE.md
+
+Guidance for Claude Code when working in this repository.
+
+## Project
+
+A product shipped as a **web app** plus **iOS and Android mobile apps**, with an **AI agent** integrated into all of them. The repo is at an early stage (only a placeholder `index.html` so far); the stack has not been finalized.
+
+When the stack is chosen, prefer one that shares code across platforms, for example a TypeScript monorepo with a web framework (e.g. Next.js), a React Native/Expo mobile app, and shared packages for types, API client, UI tokens and agent logic. Update this file once a decision is made.
+
+## Engineering rules
+
+### Code quality and scalability
+- Write clean, typed, modular code. Use TypeScript in strict mode for JS/TS code.
+- Keep business logic, API access and AI-agent logic in shared modules, not duplicated per platform.
+- Separate concerns: UI, state, data access, and services in their own layers.
+- Design APIs and data models for growth: pagination, versioned endpoints, idempotent writes, background jobs for slow work.
+- Add tests for non-trivial logic, and keep linting/formatting (ESLint + Prettier or equivalent) passing.
+- No dead code, commented-out blocks, or unexplained magic values.
+
+### Security
+- Never commit secrets. Use environment variables, and keep `.env*` files in `.gitignore` (commit only an `.env.example`).
+- AI provider API keys live **server-side only**. Web and mobile clients call our backend, never the AI provider directly.
+- Validate and sanitize all input on the server (e.g. with a schema validator such as Zod).
+- Use proven auth (OAuth/OIDC or an established auth library); store tokens securely (httpOnly cookies on web, Keychain/Keystore via secure storage on mobile).
+- Apply authorization checks on every endpoint, rate limiting on public and AI endpoints, and HTTPS everywhere.
+- Set security headers (CSP, HSTS, X-Content-Type-Options, etc.) on the web app.
+- AI agent safety: treat model output and tool-call arguments as untrusted, guard against prompt injection, limit agent tools to least privilege, and log agent actions.
+- Keep dependencies patched; run `npm audit` (or equivalent) when adding packages.
+
+### Dependencies
+- Always use the **latest stable** versions of packages and frameworks when adding or upgrading them. Check the current version rather than relying on memory.
+- Prefer well-maintained, widely used packages; avoid adding a dependency for trivial functionality.
+
+### Git
+- **Commit after every meaningful change** with a clear, descriptive message (what changed and why).
+- Keep commits focused: one logical change per commit. Don't commit secrets, build output, or `node_modules`.
+
+## UI / design rules
+- **Mobile-first and responsive:** every web page must work well on phone screens (~360px wide) up to desktop. Use fluid layouts (flex/grid), relative units, and touch-friendly targets (min 44×44px).
+- **Font:** use **Inter** everywhere (web: load Inter, fallback `system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`; mobile: bundle Inter).
+- **Border radius:** use **15px** for cards, buttons, inputs, modals and other rounded elements. Define it once as a design token (e.g. `--radius: 15px`) and reuse it on web and mobile.
+- Keep design tokens (colors, spacing, radius, typography) in one shared place so web and mobile stay consistent.
+- Meet accessibility basics: semantic HTML, labels for inputs, sufficient color contrast, keyboard navigation.
