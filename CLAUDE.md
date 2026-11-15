@@ -4,7 +4,26 @@ Guidance for Claude Code when working in this repository.
 
 ## Project
 
-A product shipped as a **web app** plus **iOS and Android mobile apps**, with an **AI agent** integrated into all of them. The repo is at an early stage (only a placeholder `index.html` so far); the stack has not been finalized.
+A **local services marketplace** shipped as a **web app** plus **iOS and Android mobile apps**, with an **AI agent** integrated into all of them. The repo is at an early stage (only a placeholder `index.html` so far); the stack has not been finalized.
+
+### Core flow
+1. **Listings:** local businesses are listed and searchable on web and mobile.
+2. **Quote request:** a customer selects a business (or describes the job) and requests a quote.
+3. **AI quote:** the AI agent proposes an appointment date/time and cost.
+4. **Booking and payment:** the customer accepts and pays to confirm the appointment.
+5. **Dispatch:** the AI agent sends the job request to a technician, who accepts and does the job.
+6. **Invoice:** the AI agent emails the customer an invoice with a payment link.
+
+### Roles
+- **Customer:** browses businesses, requests quotes, books, pays.
+- **Business:** manages its listing, services, pricing, availability and technicians.
+- **Technician:** receives job requests, accepts or declines, completes jobs.
+- **Admin:** moderates listings and handles disputes and refunds.
+
+### AI agent rules
+- Quotes and time slots must come from real business data (services, pricing rules, technician availability), never invented by the model.
+- Actions with side effects (charging money, dispatching technicians, sending invoices) go through backend tools with validation, authorization and an audit log.
+- Payments run only through the payment provider. The agent creates payment links but never handles card data.
 
 When the stack is chosen, prefer one that shares code across platforms, for example a TypeScript monorepo with a web framework (e.g. Next.js), a React Native/Expo mobile app, and shared packages for types, API client, UI tokens and agent logic. Update this file once a decision is made.
 
