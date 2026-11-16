@@ -23,10 +23,16 @@ export default function Home() {
               How it works
             </a>
             <a
-              href="#business"
+              href="/signin"
+              className="flex min-h-11 items-center px-3 text-sm font-semibold text-ink hover:text-brand-600"
+            >
+              Sign in
+            </a>
+            <a
+              href="/signup"
               className="flex min-h-11 items-center rounded-brand bg-brand-500 px-4 text-sm font-semibold text-white hover:bg-brand-600"
             >
-              List your business
+              Sign up
             </a>
           </div>
         </nav>
@@ -112,7 +118,7 @@ export default function Home() {
               commission on each invoice.
             </p>
             <a
-              href="/business/signup"
+              href="/signup"
               className="mt-6 inline-flex min-h-11 items-center rounded-brand bg-white px-5 font-semibold text-brand-700"
             >
               Get started
