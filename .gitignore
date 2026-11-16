@@ -29,3 +29,8 @@ android/
 .DS_Store
 *.log
 coverage/
+
+# test output
+test-results/
+playwright-report/
+blob-report/
