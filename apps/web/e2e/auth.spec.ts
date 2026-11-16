@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test.describe("auth flows", () => {
   test("home page leads to sign up", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Book trusted local services");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("What do you need today?");
     await page.getByRole("link", { name: "Sign up" }).click();
     await expect(page).toHaveURL(/\/signup$/);
     await expect(page.getByRole("heading", { name: "Create your account" })).toBeVisible();

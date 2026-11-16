@@ -41,8 +41,11 @@ Guidance for Claude Code when working in this repository.
 
 ### Stack and layout
 
-- npm workspaces + Turborepo monorepo. Run `npm run dev:web` from the root (http://localhost:3000).
-- `apps/web`: Next.js 16 (App Router, `cacheComponents` on) + Tailwind 4. Read `apps/web/AGENTS.md` and `node_modules/next/dist/docs/` before writing Next.js code; this version has breaking changes.
+- npm workspaces + Turborepo monorepo. Run `npm run dev:web` (http://localhost:3000) and `npm run dev:marketing` (http://localhost:3001) from the root.
+- **Domains:** the **marketing site** is on the **root domain** (e.g. `bizniss.pk`); the **product** is on the **app subdomain** (e.g. `app.bizniss.pk`). Cross-site links use `NEXT_PUBLIC_APP_URL` / `NEXT_PUBLIC_MARKETING_URL` via `appUrl()` / `marketingUrl()`; never hard-code domains. Auth cookies stay host-only on the app subdomain.
+- `apps/web`: the product (app subdomain). Next.js 16 (App Router, `cacheComponents` on) + Tailwind 4. Read `apps/web/AGENTS.md` and `node_modules/next/dist/docs/` before writing Next.js code; this version has breaking changes.
+- `apps/marketing`: the marketing site (root domain). Next.js 16, static content, no auth or database access. Sign in, sign up and search link to the app subdomain.
+- Theme CSS is shared from `packages/shared/theme.css`; both apps import it in `globals.css`.
 - `apps/mobile`: Expo (React Native) app for iOS and Android (planned).
 - `packages/shared`: design tokens, zod schemas, types, money/commission helpers. Consumed as TypeScript source by web and mobile.
 

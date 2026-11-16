@@ -15,7 +15,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "format": "prettier --write .",
-    "test:e2e": "turbo run test:e2e"
+    "test:e2e": "turbo run test:e2e",
+    "dev:marketing": "turbo run dev --filter=@bizniss/marketing"
   },
   "devDependencies": {
     "prettier": "3.10.1",
